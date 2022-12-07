@@ -1,0 +1,411 @@
+import React, {Component, useState} from "react";
+import TutorialDataService from "../service/advertisement.service";
+
+function AddAdvertisement(props)
+{
+
+
+    let [id, setId] = useState(null);
+    let [title, setTitle] = useState("");
+    let [description, setDescription] = useState("");
+
+
+    const onChangeTitle = e => {
+        setTitle(title = e.target.value);
+    }
+    const onChangeDescription = e => {
+        setDescription(description = e.target.value);
+    }
+    function saveTutorial() {
+        var data = {
+            title: onChangeTitle.title,
+            description: onChangeDescription.title
+        };
+
+        TutorialDataService.create(data)
+            .then(response => {
+                setId(id = response.data.id)
+                setTitle(title = response.data.title);
+                setDescription(description = response.data.description)
+                console.log(response.data);
+
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+    function newTutorial() {
+        id:setId(null);
+       title: setTitle("");
+        description:setDescription("");
+}
+return(
+    <div className="submit-form">
+            <div>
+                <h4>You submitted successfully!</h4>
+                <button className="btn btn-success" onClick={newTutorial}>
+                    Add
+                </button>
+            </div>
+            <div>
+                <div className="form-group">
+                    <label htmlFor="title">Title</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="title"
+                        required
+                        value={title}
+                        onChange={onChangeTitle}
+                        name="title"
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="description">Description</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        id="description"
+                        required
+                        value={description}
+                        onChange={onChangeDescription}
+                        name="description"
+                    />
+                </div>
+
+                <button onClick={saveTutorial} className="btn btn-success">
+                    Submit
+                </button>
+            </div>
+        )}
+    </div>
+);
+};
+
+
+
+
+
+
+Advertisement
+
+
+
+function advertisement() {
+    let [id, setId] = useState(null)
+    let [job, setJob] = useState("");
+    let [descr, setDescr] = useState("");
+    let [message, setMessage] = useState("");
+    let [currentadvertisement, setcurrentadvertisement] = useState([])
+    const params = useParams();
+
+
+    useEffect(() => {
+        getadvertisement(params.id)
+    },);
+
+    const onChangeTitle = e => {
+        const job = e.target.value;
+        setJob(function (prevState) {
+            setcurrentadvertisement(
+                prevState.currentadvertisement,
+                    setJob(job)
+            )
+        })
+    }
+
+    function onChangeDescription(e) {
+        const description_adv = e.target.value;
+        setDescr(function (prevState) {
+            setcurrentadvertisement(
+                prevState.currentadvertisement,
+                    setDescr(description_adv)
+        )
+        })
+    }
+
+    function getadvertisement(id) {
+        AdvertisementDataService.get(id)
+            .then(response => {
+                currentadvertisement:response.data
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+   function updateadvertisement(){
+        AdvertisementDataService.update(
+
+        )
+
+}
+
+
+
+
+////////////class adv
+
+
+class advertisement extends Component {
+    constructor(props) {
+        super(props);
+        this.onChangeTitle = this.onChangeTitle.bind(this);
+        this.onChangeDescription = this.onChangeDescription.bind(this);
+        this.getTutorial = this.getTutorial.bind(this);
+        this.updateadvertisement = this.updateadvertisement.bind(this);
+        this.deleteadvertisement = this.deleteadvertisement.bind(this);
+
+        this.state = {
+            currentadvertisement: {
+                id: null,
+                job: "",
+                description_adv: "",
+                published: false
+            },
+            message: ""
+        };
+    }
+
+    componentDidMount() {
+        this.getTutorial(this.props.router.params.id);
+    }
+
+    onChangeTitle(e) {
+        const job = e.target.value;
+
+        this.setState(function(prevState) {
+            return {
+
+                currentadvertisement: {
+                    ...prevState.currentadvertisement,
+                    job: job
+                }
+
+            };
+        });
+        console.log('test');
+
+    }
+
+    onChangeDescription(e) {
+        const description_adv = e.target.value;
+
+        this.setState(prevState => ({
+            currentadvertisement: {
+                ...prevState.currentadvertisement,
+                description_adv: description_adv
+            }
+        }));
+    }
+
+    getTutorial(id) {
+        AdvertisementDataService.get(id)
+            .then(response => {
+                this.setState({
+                    currentadvertisement: response.data
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+
+
+    updateadvertisement() {
+        AdvertisementDataService.update(
+            this.state.currentadvertisement.id,
+            this.state.currentadvertisement
+        )
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    message: "The tutorial was updated successfully!"
+                });
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+    deleteadvertisement() {
+        AdvertisementDataService.delete(this.state.currentadvertisement.id)
+            .then(response => {
+                console.log(response.data);
+                this.props.router.navigate('/advertisements');
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+    render() {
+        const {currentadvertisement} = this.state;
+
+
+
+
+
+
+
+
+
+import React, {useState,useEffect,} from "react";
+import AdvertisementDataService from "../service/advertisement.service";
+import { withRouter } from '../common/with-router';
+import { useNavigate,useParams} from "react-router-dom";
+
+
+
+
+function Advertisement() {
+    let [id, setId] = useState(null)
+    let [jobs, setJob] = useState("");
+    let [description_adv, setdescription_adv] = useState("");
+    let [message, setMessage] = useState("");
+    let [currentadvertisement, setcurrentadvertisement] = useState({
+        id: null,
+        job: "",
+        description_adv: "",
+    })
+
+    const params = useParams();
+    let navigate = useNavigate();
+
+
+    useEffect(() => {
+        Getadvertisement(params.id)
+    },[]);
+
+
+    function OnChangeTitle(e) {
+        const job = e.target.value;
+        setJob(job);
+        setcurrentadvertisement({
+            job:job,
+        })
+
+
+    }
+
+    function OnChangeDescription(e) {
+        const description_adv = e.target.value;
+        setdescription_adv(description_adv);
+        setcurrentadvertisement({
+            id:id,
+            job:job,
+            description_adv:description_adv,
+        })
+    }
+
+    function Getadvertisement(id) {
+        AdvertisementDataService.get(id)
+            .then(response => {
+                setcurrentadvertisement({
+                    id:response.data.id,
+                    job: response.data.job,
+                    description_adv: response.data.description_adv,
+                })
+                console.log(response.data);
+
+            })
+            .catch(e => {
+                console.log(e);
+            });
+
+    }
+
+    function Updateadvertisement() {
+        AdvertisementDataService.update(
+            currentadvertisement.id,
+            currentadvertisement
+        )
+            .then(response =>{
+                console.log(currentadvertisement)
+                console.log(response.data)
+                setMessage("The tutorial was updated successfully!")
+            })
+        .catch(e=>{
+            console.log(e)
+        })
+
+    }
+    function Deleteadvertisement(){
+        AdvertisementDataService.delete(
+            useState(currentadvertisement.id)
+        )
+            .then(response=>{
+                console.log(response.data)
+                navigate("../advertisements", { replace: true });
+            })
+            .catch(e=>{
+                console.log(e)
+            })
+    }
+
+
+        return (
+            <div>
+                {currentadvertisement ? (
+                    <div className="edit-form">
+                        <h4>advertisement</h4>
+                        <form>
+                            <div className="form-group">
+                                <label htmlFor="title">Title</label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    id="title"
+                                    value={currentadvertisement.job || ""}
+                                    onChange={OnChangeTitle}
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="description">Description</label>
+                                <textarea
+                                    type="text"
+                                    className="form-control h-100"
+                                    id="description"
+                                    value={currentadvertisement.description_adv}
+                                    onChange={OnChangeDescription}
+                                />
+                                <label htmlFor="etst"></label>
+
+                            </div>
+
+
+                        </form>
+
+
+
+                        <button
+                            className="badge badge-danger mr-2"
+                            onClick={Deleteadvertisement}
+                        >
+                            Delete
+                        </button>
+
+                        <button
+                            type="submit"
+                            className="badge badge-success"
+                            onClick={Updateadvertisement}
+                        >
+                            Update
+                        </button>
+                        <p>{message}</p>
+                    </div>
+                ) : (
+                    <div>
+                        <br/>
+                        <p>Please click on a advertisement...</p>
+                    </div>
+                )}
+            </div>
+        );
+}
+
+export default withRouter(Advertisement);

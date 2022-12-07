@@ -1,0 +1,37 @@
+
+function App() {
+  return (
+      <div>
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
+          <Link to={"/advertisements"} className="navbar-brand">
+            bezKoder
+          </Link>
+          <div className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to={"/advertisements"} className="nav-link"
+              onClick={AdsList.componentDidMount}
+              >
+                Tutorials
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/add"} className="nav-link">
+                Add
+              </Link>
+            </li>
+          </div>
+        </nav>
+
+        <div className="container mt-3">
+          <Routes>
+            <Route path="/" element={<AdsList/>} />
+            <Route path="/advertisements" element={<AdsList/>} />
+            <Route path="/add" element={<AddAdvertisement/>} />
+            <Route path="/advertisement/:id" element={<Advertisement/>} />
+          </Routes>
+        </div>
+      </div>
+  );
+}
+
+export default App;

@@ -1,0 +1,392 @@
+
+
+/*COnfiguration*/
+body{
+    margin: 0;
+}
+html {
+	font-size: 82.5%;
+}
+
+@media (min-width: 1025px) {
+    html {
+        font-size: 122.5%;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&family=Roboto:wght@400;700&display=swap');
+@font-face {
+    font-family: "Quakiez";
+    src: url(../font/Quakiez.otf);
+    
+  }
+:root {
+    --main-dark-color: #041C32;
+    --second-dark-color:#064663;
+    --light-dark-color:#ECB365;
+  }  
+body{
+    overflow-x: hidden;
+}
+
+h1{font-family: 'Poppins',sans-serif;
+    font-weight: 800;
+font-size: 4rem;
+}
+h2{font-family: 'Poppins',sans-serif;
+    font-weight: 800;
+font-size: 3.5rem;
+}
+h3{
+    font-family: 'Poppins',sans-serif;
+    font-size: 2.5rem;
+    color: var(--light-dark-color);
+    font-weight: bolder;
+    margin: 0;
+}
+p{font-family: 'Roboto',sans-serif;
+font-size: 1.5rem;}
+
+
+.flex-r-sb-c{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex-r-sa-c{
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.flex-c-sb-c{
+    display: flex;
+    width: 100%;
+
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex-c-sb-s{
+    display: flex;
+    width: 100%;
+
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.flex-r-c-c{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+}
+.local>*{
+    padding: 0 5px;
+}
+
+
+
+
+/*En-tête*/
+
+header{
+    width: 100%;
+    height: 100%;
+}
+
+    navd{
+        background: var(--second-dark-color);
+        color: var(--light-dark-color);
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        list-style: none;
+        text-decoration: none;
+
+    }
+.container-fluid{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 3rem;
+}
+.logo{
+    font-family: 'Quakiez',sans-serif;
+    font-size: 2rem;
+    color: var(--light-dark-color);
+}
+nav button i{
+    color: var(--light-dark-color);
+}
+#in-canvas{
+    width: 100%;
+    max-width: 800px;
+}      
+.nav-desk{
+    width: 90%;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.nav-bar-toggler{
+    display: none;
+    background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+}
+
+#off-canvas{
+ position: fixed;
+ top: 0;
+ right: 0;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ width: 100%;
+ height: 100vh;
+}
+.flex-col{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.hidden{
+    display: none;
+}
+
+
+
+main{
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+
+@media screen and (max-width:768px) {
+    .nav-bar-toggler{
+        display: inline !important;
+    }
+    #in-canvas{
+        display:none
+    }
+    
+}
+.post:not(:last-child){
+    margin-bottom: 50px;
+}
+.hide{
+    display: none;
+}
+
+/*IMG*/
+
+#img{
+    background-image: url(../img/main.jpg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-position: center;
+    height: 50vh;
+    padding: 0 3rem;
+
+    
+}
+#img span{
+    font-size: 3.5rem;
+}
+
+
+
+
+
+
+
+/*JOB LIST*/
+main{
+    margin-top: 10rem;
+}
+main h2{
+    margin-bottom: 4rem;
+}
+
+.jobs-list{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (min-width:768px) {
+    .jobs-list{
+        display: grid;
+        align-items: start;
+        grid-template-columns: repeat(2,minmax(0,1fr));
+        gap: 1rem;
+    }
+}
+
+@media screen and (min-width :1024px) {
+    .jobs-list{
+        display: grid;
+        align-items: start;
+        grid-template-columns: repeat(4,minmax(0,1fr));
+        gap: 1rem;
+
+    }
+    
+}
+
+.job-container{
+    width: 100%;
+    margin-bottom: 25px;
+    min-width: 250px;
+    max-width: 600px;
+    height: fit-content;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    position: relative;
+    border-radius:  0.5rem;
+    -webkit-box-shadow: 5px 9px 17px 0px rgba(0,0,0,0.14); 
+box-shadow: 5px 9px 17px 0px rgba(0,0,0,0.14);
+}
+
+.job-header{
+  
+    background-color: #041C32;
+    width: 100%;
+    color: white;
+}
+
+.head-elements{
+    align-items: flex-start;
+
+}
+
+.job-header-logo{
+    margin-bottom: -50px;
+    width: 130px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.job-contrat{
+    background-color: var(--light-dark-color);
+    padding: 4px 10px;
+    font-weight: 600;
+    font-family: 'Poppins';
+    border-radius: 99px;
+
+}
+.job-contrat-cont{
+    padding-top: 10px;
+    padding-left: 5px;
+}
+.like{
+    width: 2rem;
+    height: 2rem;
+    padding-top: 10px;
+    padding-right: 5px;
+}
+
+.job-descr-title{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    padding-top: 2rem;
+    margin-bottom: 3rem;
+
+}
+.job-descr-title>*{
+    padding-left:15px;
+    padding-right: 15px;
+
+}
+h3{
+    margin-bottom: 2px;
+}
+
+.job-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between ;
+    width: 90%;
+    align-items: center;
+}
+.job-info>span{
+    font-family: 'Poppins';
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.job-descr-p span{
+    font-family: 'Poppins';
+    font-size: 1.5rem;
+
+}
+
+
+.separator{
+    width: 80%;
+    height: 1px;
+    background-color:var(--main-dark-color);
+    opacity: 0.5;
+}
+
+.local{
+    font-family: 'Poppins';
+}
+.job-descr{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    height: 130px; 
+    margin-bottom: 75px;
+}
+
+.job-descr-p{
+    padding: 10px 15px;
+       
+}
+.job-btn{
+    color: var(--light-dark-color);
+    font-family: 'Poppins';
+    font-weight: 800;
+    font-size: 1.8rem;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;
+   
+}
+
+.see-more{
+    grid-column: 3/1;
+}
+.see-more-p{
+    height:fit-content
+}
